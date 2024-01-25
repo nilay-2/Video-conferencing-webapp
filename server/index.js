@@ -62,6 +62,10 @@ io.on("connection", (socket) => {
   });
 });
 
+app.get("/", (req, res, next) => {
+  res.send("Welcome to the server side of video conferencing app 📽 🎮");
+});
+
 httpServer.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
