@@ -162,7 +162,7 @@ const Meet = () => {
       closeAllPeerConnectionOfCurrentUser(context);
       context.state.socket.emit("leave-room", { roomId, email: state.email });
     }
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "https://meetvista.netlify.app/";
   };
   // flex justify-between flex-col
 
