@@ -1,0 +1,30 @@
+import Meet from "./pages/Meet";
+import Home from "./pages/Home";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createContext, useReducer } from "react";
+import { initialState, reducer } from "./store";
+
+export const AppContext = createContext();
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/room/:roomId",
+    element: <Meet />,
+  },
+]);
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <AppContext.Provider value={{ state, dispatch }}>
+      <RouterProvider router={router} />
+    </AppContext.Provider>
+  );
+}
+
+export default App;
