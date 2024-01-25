@@ -27,7 +27,9 @@ const Home = () => {
         : "http://localhost:5000";
 
     console.log(process.env.NODE_ENV);
-    const socket = io(url);
+    const socket = io(url, {
+      withCredentials: true,
+    });
 
     dispatch({ type: "SET_SOCKET_CONNECTION", payload: { socket: socket } });
 
