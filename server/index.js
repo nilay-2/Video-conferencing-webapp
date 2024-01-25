@@ -1,7 +1,10 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const { addMember, initialUpdate, leaveRoom } = require("./utils/RoomHandler");
+
+dotenv.config();
 
 const port = 5000;
 
@@ -67,5 +70,7 @@ app.get("/", (req, res, next) => {
 });
 
 httpServer.listen(port, () => {
-  console.log(`App running on port ${port}`);
+  console.log(
+    `App running on port ${port} \nEnviroment: ${process.env.NODE_ENV}`
+  );
 });
