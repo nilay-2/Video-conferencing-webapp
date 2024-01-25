@@ -25,6 +25,8 @@ const Home = () => {
       process.env.NODE_ENV === "production"
         ? "https://meetvistaserver.adaptable.app/"
         : "http://localhost:5000";
+
+    console.log(process.env.NODE_ENV);
     const socket = io(url);
 
     dispatch({ type: "SET_SOCKET_CONNECTION", payload: { socket: socket } });
