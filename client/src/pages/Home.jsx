@@ -21,7 +21,11 @@ const Home = () => {
   } = useForm();
 
   useEffect(() => {
-    const socket = io("http://localhost:5000");
+    const url =
+      process.env.NODE_ENV === "production"
+        ? "https://meetvistaserver.adaptable.app/"
+        : "http://localhost:5000";
+    const socket = io(url);
 
     dispatch({ type: "SET_SOCKET_CONNECTION", payload: { socket: socket } });
 
