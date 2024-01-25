@@ -6,7 +6,7 @@ const { addMember, initialUpdate, leaveRoom } = require("./utils/RoomHandler");
 
 dotenv.config();
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // const activeRooms = new Set(); // Set to store active rooms
 const roomMembers = new Map(); // Map to store members of each room
