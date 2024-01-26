@@ -29,7 +29,6 @@ const Home = () => {
     console.log(process.env.NODE_ENV);
     const socket = io(url, {
       withCredentials: true,
-      reconnection: false,
     });
 
     dispatch({ type: "SET_SOCKET_CONNECTION", payload: { socket: socket } });
@@ -38,9 +37,9 @@ const Home = () => {
       console.log(socket.id);
     });
 
-    // return () => {
-    //   socket.removeAllListeners();
-    // };
+    return () => {
+      socket.removeAllListeners("connect");
+    };
   }, []);
 
   const onSubmit = (data) => {

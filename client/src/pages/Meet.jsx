@@ -79,6 +79,13 @@ const Meet = () => {
       // console.log(`leaving user socket id: ${roomLeavingUserSocketId}`);
       closePeerConnectionOfLeavingUser(roomLeavingUserSocketId, context);
     });
+
+    return () => {
+      socket?.removeAllListeners("connection-prepare");
+      socket?.removeAllListeners("connection-init");
+      socket?.removeAllListeners("connection-signal");
+      socket?.removeAllListeners("notify-participant-left-room");
+    };
   }, []);
 
   const toggleCamera = () => {
