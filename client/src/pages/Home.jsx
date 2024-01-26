@@ -28,7 +28,7 @@ const Home = () => {
 
     console.log(process.env.NODE_ENV);
     const socket = io(url, {
-      withCredentials: true,
+      // withCredentials: true,
     });
 
     dispatch({ type: "SET_SOCKET_CONNECTION", payload: { socket: socket } });
