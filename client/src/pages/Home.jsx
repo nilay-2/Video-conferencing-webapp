@@ -29,7 +29,6 @@ const Home = () => {
     console.log(process.env.NODE_ENV);
     const socket = io(url, {
       // withCredentials: true,
-      reconnection: false,
     });
 
     dispatch({ type: "SET_SOCKET_CONNECTION", payload: { socket: socket } });
@@ -42,22 +41,27 @@ const Home = () => {
   const onSubmit = (data) => {
     const { roomId, email } = data;
 
-    window.navigator.mediaDevices
-      .getUserMedia(constraints)
-      .then((stream) => {
-        // console.log("local stream", stream);
-        dispatch({
-          type: "SET_CREDENTIALS",
-          payload: { email: email, roomId: roomId, mediaStream: stream },
-        });
+    dispatch({
+      type: "SET_CREDENTIALS",
+      payload: { email: email, roomId: roomId },
+    });
 
-        state.socket.emit("join-room", data);
+    // window.navigator.mediaDevices
+    //   .getUserMedia(constraints)
+    //   .then((stream) => {
+    //     // console.log("local stream", stream);
+    //     dispatch({
+    //       type: "SET_CREDENTIALS",
+    //       payload: { email: email, roomId: roomId, mediaStream: stream },
+    //     });
 
-        navigate(`/room/${roomId}`);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    //     state.socket.emit("join-room", data);
+
+    //     navigate(`/room/${roomId}`);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   };
 
   return (
