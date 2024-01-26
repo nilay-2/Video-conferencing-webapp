@@ -46,22 +46,22 @@ const Home = () => {
       payload: { email: email, roomId: roomId },
     });
 
-    // window.navigator.mediaDevices
-    //   .getUserMedia(constraints)
-    //   .then((stream) => {
-    //     // console.log("local stream", stream);
-    //     dispatch({
-    //       type: "SET_CREDENTIALS",
-    //       payload: { email: email, roomId: roomId, mediaStream: stream },
-    //     });
+    window.navigator.mediaDevices
+      .getUserMedia(constraints)
+      .then((stream) => {
+        // console.log("local stream", stream);
+        dispatch({
+          type: "SET_CREDENTIALS",
+          payload: { email: email, roomId: roomId, mediaStream: stream },
+        });
 
-    //     state.socket.emit("join-room", data);
+        state.socket.emit("join-room", data);
 
-    //     navigate(`/room/${roomId}`);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
+        navigate(`/room/${roomId}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

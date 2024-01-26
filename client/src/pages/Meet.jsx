@@ -187,23 +187,23 @@ const Meet = () => {
           <div className="h-full w-full overflow-auto">
             <div className="video-grid-container h-full w-full">
               <div className="h-full w-full mx-auto bg-black rounded-md">
-                {/*<video
+                <video
                   ref={videoRef}
                   autoPlay
                   className="w-full h-full"
                   muted
-        ></video>*/}
+                ></video>
               </div>
               {enableScreenSharing && <ScreeSharingComponent />}
 
-              {/*{context.state.remoteStreams.map((streamPayload, i) => {
+              {context.state.remoteStreams.map((streamPayload, i) => {
                 return (
                   <VideoContainer
                     streamPayload={streamPayload}
                     key={streamPayload.remoteStream.id}
                   />
                 );
-              })}*/}
+              })}
             </div>
           </div>
         </div>
