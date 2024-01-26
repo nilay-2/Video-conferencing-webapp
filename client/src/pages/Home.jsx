@@ -36,11 +36,6 @@ const Home = () => {
     socket.on("connect", () => {
       console.log(socket.id);
     });
-
-    return () => {
-      socket.removeAllListeners("connect");
-      socket.disconnect();
-    };
   }, []);
 
   const onSubmit = (data) => {

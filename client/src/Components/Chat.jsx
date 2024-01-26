@@ -18,10 +18,6 @@ const Chat = ({ showChatBox, setShowChatBox }) => {
         payload: { msgData: msgData },
       });
     });
-
-    return () => {
-      socket?.removeListener("send_message_to_room");
-    };
   }, []);
 
   const sendMessage = () => {

@@ -79,13 +79,6 @@ const Meet = () => {
       // console.log(`leaving user socket id: ${roomLeavingUserSocketId}`);
       closePeerConnectionOfLeavingUser(roomLeavingUserSocketId, context);
     });
-
-    return () => {
-      socket?.removeAllListeners("connection-prepare");
-      socket?.removeAllListeners("connection-init");
-      socket?.removeAllListeners("connection-signal");
-      socket?.removeAllListeners("notify-participant-left-room");
-    };
   }, []);
 
   const toggleCamera = () => {
@@ -172,7 +165,7 @@ const Meet = () => {
 
     const url =
       process.env.NODE_ENV === "production"
-        ? "https://meetvista.netlify.app"
+        ? "https://video-conferencing-webapp.vercel.app/"
         : "http://localhost:3000";
 
     window.location.href = url;
