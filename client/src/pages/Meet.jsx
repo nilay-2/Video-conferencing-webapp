@@ -32,7 +32,7 @@ const displayMediaOptions = {
 const Meet = () => {
   // using context
   const context = useContext(AppContext);
-  // console.log(context.state);
+  console.log(context.state);
   // url params
   const { roomId } = useParams();
 

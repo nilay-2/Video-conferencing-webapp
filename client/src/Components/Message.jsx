@@ -22,7 +22,7 @@ const Message = (props) => {
   return (
     <>
       {props.chats.map((chat, i) => {
-        console.log(chat);
+        // console.log(chat);
 
         if (!chat.fromSameAuthor) {
           return (

@@ -12,7 +12,7 @@ const Chat = ({ showChatBox, setShowChatBox }) => {
     const { socket } = state;
 
     socket?.on("send_message_to_room", (msgData) => {
-      console.log(msgData);
+      // console.log(msgData);
       dispatch({
         type: "APPEND_MESSAGE",
         payload: { msgData: msgData },
