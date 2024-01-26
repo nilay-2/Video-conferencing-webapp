@@ -39,6 +39,7 @@ const Home = () => {
 
     return () => {
       socket.removeAllListeners("connect");
+      socket.disconnect();
     };
   }, []);
 
