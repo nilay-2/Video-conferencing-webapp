@@ -23,7 +23,7 @@ const Home = () => {
   useEffect(() => {
     const url =
       process.env.NODE_ENV === "production"
-        ? "https://meetvistaserver.adaptable.app"
+        ? "https://meetvistaserver.onrender.com"
         : "http://localhost:5000";
 
     console.log(process.env.NODE_ENV);
