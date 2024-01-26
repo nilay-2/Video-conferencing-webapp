@@ -54,7 +54,7 @@ const Meet = () => {
     // event received from the incoming user
     const { socket } = context.state;
 
-    // videoRef.current.srcObject = context.state.mediaStream;
+    videoRef.current.srcObject = context.state.mediaStream;
 
     socket?.on("connection-prepare", (data) => {
       console.log(`preparation data ${data}`);
