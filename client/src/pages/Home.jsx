@@ -41,11 +41,6 @@ const Home = () => {
   const onSubmit = (data) => {
     const { roomId, email } = data;
 
-    dispatch({
-      type: "SET_CREDENTIALS",
-      payload: { email: email, roomId: roomId },
-    });
-
     window.navigator.mediaDevices
       .getUserMedia(constraints)
       .then((stream) => {
