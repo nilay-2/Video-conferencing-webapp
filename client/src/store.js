@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import MsgNotifItem from "./Components/MsgNotifItem";
+
 export const initialState = {
   email: "",
   roomId: "",
@@ -6,6 +9,7 @@ export const initialState = {
   screenSharingStream: null,
   socket: null,
   chat: [],
+  showChatBox: false,
 };
 
 /*
@@ -26,7 +30,7 @@ export const reducer = (state = initialState, action) => {
       };
 
     case "SET_REMOTE_STREAMS":
-      console.log("Remote stream", action.payload);
+      // console.log("Remote stream", action.payload);
       return {
         ...state,
         remoteStreams: [...state.remoteStreams, action.payload],
@@ -77,6 +81,15 @@ export const reducer = (state = initialState, action) => {
     case "APPEND_MESSAGE":
       // logic to check if current message and previous message are from the same author
 
+      if (!state.showChatBox) {
+        toast(<MsgNotifItem latestMsg={action.payload.msgData} />, {
+          theme: "dark",
+          autoClose: 3000,
+          pauseOnHover: false,
+          position: "bottom-right",
+        });
+      }
+
       const msgDataObj = { ...action.payload.msgData };
 
       if (isMessageFromSameAuthor(state.chat, action.payload.msgData)) {
@@ -88,6 +101,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         chat: [...state.chat, msgDataObj],
+      };
+
+    case "TOGGLE_CHAT_BOX":
+      return {
+        ...state,
+        showChatBox: !state.showChatBox,
       };
 
     default:

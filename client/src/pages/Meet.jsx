@@ -32,7 +32,7 @@ const displayMediaOptions = {
 const Meet = () => {
   // using context
   const context = useContext(AppContext);
-  console.log(context.state);
+  // console.log(context.state);
   // url params
   const { roomId } = useParams();
 
@@ -47,7 +47,7 @@ const Meet = () => {
   const [enableVideo, setEnableVideo] = useState(true);
   const [enableAudio, setEnableAudio] = useState(true);
   const [enableScreenSharing, setEnableScreenSharing] = useState(false);
-  const [showChatBox, setShowChatBox] = useState(false);
+  // const [showChatBox, setShowChatBox] = useState(false);
   const [showMember, setShowMember] = useState(false);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Meet = () => {
     videoRef.current.srcObject = context.state.mediaStream;
 
     socket?.on("connection-prepare", (data) => {
-      console.log(`preparation data ${data}`);
+      // console.log(`preparation data ${data}`);
       const { incomingSocketId } = data;
 
       prepareForIncomingConnection(socket, incomingSocketId, false, context);
@@ -179,7 +179,7 @@ const Meet = () => {
       >
         <div
           className={`p-2 h-full ${resizeComponent({
-            status: showChatBox,
+            status: context.state.showChatBox,
             lead: "md:w-3/4",
             fallback: "w-full",
           })}`}
@@ -226,11 +226,11 @@ const Meet = () => {
           <button
             className="text-white bg-gray-700 rounded-full px-3 py-2"
             onClick={() => {
-              setShowChatBox(!showChatBox);
+              context.dispatch({ type: "TOGGLE_CHAT_BOX" });
             }}
           >
             <IconToggle
-              state={showChatBox}
+              state={context.state.showChatBox}
               fallback={<i className="bi bi-chat-right-text"></i>}
               lead={<i className="bi bi-chat-right-fill"></i>}
             />
@@ -269,7 +269,7 @@ const Meet = () => {
             <i className="bi bi-telephone-fill"></i>
           </button>
         </div>
-        <Chat showChatBox={showChatBox} setShowChatBox={setShowChatBox} />
+        <Chat />
       </div>
     </>
   );

@@ -26,7 +26,7 @@ const Home = () => {
         ? "https://meetvistaserver.onrender.com"
         : "http://localhost:5000";
 
-    console.log(process.env.NODE_ENV);
+    console.log(`Environment: ${process.env.NODE_ENV}`);
     const socket = io(url, {
       // withCredentials: true,
     });
