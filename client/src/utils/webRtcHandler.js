@@ -1,4 +1,4 @@
-import Peer from "simple-peer";
+import SimplePeer from "simple-peer";
 
 const peers = {};
 
@@ -21,7 +21,7 @@ export const prepareForIncomingConnection = (
   const { state, dispatch } = context;
 
   // console.log(state?.mediaStream);
-  peers[incomingSocketId] = new Peer({
+  peers[incomingSocketId] = new SimplePeer({
     initiator,
     stream: state.mediaStream,
   });
