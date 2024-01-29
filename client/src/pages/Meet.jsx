@@ -11,7 +11,7 @@ import {
 import VideoContainer from "../Components/VideoContainer";
 import "../css/Meet_Grid.css";
 import Chat from "../Components/Chat";
-import { resizeComponent } from "../utils/resizeComponent";
+import { resizeComponent, IconToggle } from "../utils/resizeComponent";
 
 const displayMediaOptions = {
   video: true,
@@ -149,13 +149,6 @@ const Meet = () => {
     );
   };
 
-  const IconToggle = (props) => {
-    if (!props.state) {
-      return props.fallback;
-    }
-    return props.lead;
-  };
-
   const endCallHandler = () => {
     if (context.state.socket) {
       const { state } = context;
@@ -200,7 +193,8 @@ const Meet = () => {
                 return (
                   <VideoContainer
                     streamPayload={streamPayload}
-                    key={streamPayload.remoteStream.id}
+                    key={i}
+                    vidId={streamPayload.remoteStream.id}
                   />
                 );
               })}

@@ -9,7 +9,9 @@
   grid-template-rows: repeat(2, 300px);
   grid-auto-rows: 300px;
   grid-auto-columns: 1fr;
-  gap: 20px;
+  /* gap: 20px; */
+  column-gap: 20px;
+  row-gap: 30px;
 }
 
 @media (max-width: 900px) {
