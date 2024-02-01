@@ -17,7 +17,7 @@ export const prepareForIncomingConnection = (
   /* create a copy/clone of the local stream as any changes will get reflected in the original stream 
     and it will become difficult to switch to original stream when performing "stop screen sharing"
   */
-  const newStream = stream.clone();
+  const newStream = state.mediaStreamClone;
   // console.log("newStream", newStream);
   // if (initiator) {
   //   console.log("waiting as initiator");
