@@ -28,6 +28,7 @@ export const reducer = (state = initialState, action) => {
         email: action.payload.email,
         roomId: action.payload.roomId,
         mediaStream: action.payload.mediaStream,
+        mediaStreamClone: action.payload.mediaStreamClone,
       };
 
     case "SET_REMOTE_STREAMS":
