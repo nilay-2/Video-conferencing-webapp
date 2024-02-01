@@ -46,7 +46,7 @@ const Home = () => {
       .then((stream) => {
         // console.log("local stream", stream);
 
-        const clone = stream.clone();
+        // const clone = stream.clone();
 
         dispatch({
           type: "SET_CREDENTIALS",
@@ -54,7 +54,7 @@ const Home = () => {
             email: email,
             roomId: roomId,
             mediaStream: stream,
-            mediaStreamClone: clone,
+            // mediaStreamClone: clone,
           },
         });
 

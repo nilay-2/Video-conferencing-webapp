@@ -56,8 +56,9 @@ const Meet = () => {
   useEffect(() => {
     // event received from the incoming user
     const { socket } = context.state;
+    console.log(context.state);
 
-    videoRef.current.srcObject = context.state.mediaStreamClone;
+    videoRef.current.srcObject = context.state.mediaStream;
 
     socket?.on("connection-prepare", (data) => {
       // console.log(`preparation data ${data}`);
@@ -86,14 +87,14 @@ const Meet = () => {
 
   const toggleCamera = () => {
     const { state } = context;
-    const videoTracks = state.mediaStreamClone.getVideoTracks();
+    const videoTracks = state.mediaStream.getVideoTracks();
     videoTracks[0].enabled = !enableVideo;
     setEnableVideo(!enableVideo);
   };
 
   const toggleAudio = () => {
     const { state } = context;
-    const audioTracks = state.mediaStreamClone.getAudioTracks();
+    const audioTracks = state.mediaStream.getAudioTracks();
     audioTracks[0].enabled = !enableAudio;
     setEnableAudio(!enableAudio);
   };
@@ -125,6 +126,28 @@ const Meet = () => {
         console.log("screen sharing stopped");
         setEnableScreenSharing(false);
         screenSharingRef.current.srcObject = null;
+
+        // restore original media stream track
+        // try {
+        //   const stream = await window.navigator.mediaDevices.getUserMedia({
+        //     audio: true,
+        //     video: true,
+        //   });
+
+        //   const clone = stream.clone();
+
+        //   dispatch({
+        //     type: "RESTORE_ORIGINAL_STREAM",
+        //     payload: {
+        //       mediaStream: stream,
+        //       mediaStreamClone: clone,
+        //     },
+        //   });
+
+        //   replaceTrack(stream);
+        // } catch (error) {
+        //   console.error(error);
+        // }
         replaceTrack(context.state.mediaStream);
         dispatch({
           type: "STOP_SCREEN_SHARING_STREAM",

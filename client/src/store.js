@@ -5,7 +5,7 @@ export const initialState = {
   email: "",
   roomId: "",
   mediaStream: null,
-  mediaStreamClone: null,
+  // mediaStreamClone: null,
   remoteStreams: [],
   screenSharingStream: null,
   socket: null,
@@ -28,7 +28,7 @@ export const reducer = (state = initialState, action) => {
         email: action.payload.email,
         roomId: action.payload.roomId,
         mediaStream: action.payload.mediaStream,
-        mediaStreamClone: action.payload.mediaStreamClone,
+        // mediaStreamClone: action.payload.mediaStreamClone,
       };
 
     case "SET_REMOTE_STREAMS":
@@ -110,6 +110,13 @@ export const reducer = (state = initialState, action) => {
         ...state,
         showChatBox: !state.showChatBox,
       };
+
+    // case "RESTORE_ORIGINAL_STREAM":
+    //   return {
+    //     ...state,
+    //     mediaStream: action.payload.mediaStream,
+    //     mediaStreamClone: action.payload.mediaStreamClone,
+    //   };
 
     default:
       return state;
