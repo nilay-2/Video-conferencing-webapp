@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../App";
 import {
@@ -12,6 +12,8 @@ import VideoContainer from "../Components/VideoContainer";
 import "../css/Meet_Grid.css";
 import Chat from "../Components/Chat";
 import { resizeComponent, IconToggle } from "../utils/resizeComponent";
+import store from "../app/store";
+import { useSelector, useDispatch } from "react-redux";
 
 const displayMediaOptions = {
   video: true,
@@ -31,6 +33,7 @@ const displayMediaOptions = {
 
 const Meet = () => {
   // using context
+  const dispatch = useDispatch();
   const context = useContext(AppContext);
   // console.log(context.state);
   // url params
@@ -100,42 +103,51 @@ const Meet = () => {
       const screenSharingStream = await navigator.mediaDevices.getDisplayMedia(
         displayMediaOptions
       );
-      // screenSharingRef.current.srcObject = screenSharingStream;
 
-      dispatchScreenSharingStream(screenSharingStream);
+      // screenSharingRef.current.srcObject = screenSharingStream;
+      // dispatchScreenSharingStream(screenSharingStream);
+
+      // dispatch({
+      //   type: "SET_SCREEN_SHARING_STREAM",
+      //   payload: { screenSharingStream: screenSharingStream },
+      // });
+
+      dispatch({
+        type: "SET_SCREEN_SHARING_STREAM",
+        payload: { screenSharingStream: screenSharingStream },
+      });
 
       setEnableScreenSharing(true);
 
       replaceTrack(screenSharingStream);
 
       screenSharingStream.oninactive = function () {
+        console.log("screen sharing stopped");
         setEnableScreenSharing(false);
         screenSharingRef.current.srcObject = null;
         replaceTrack(context.state.mediaStream);
+        dispatch({
+          type: "STOP_SCREEN_SHARING_STREAM",
+        });
         const tracks = screenSharingStream.getTracks();
         tracks.forEach((track) => track.stop());
-        dispatchScreenSharingStream(null);
       };
     } catch (err) {
       // console.error(`Error: ${err}`);
       setEnableScreenSharing(false);
-      dispatchScreenSharingStream(null);
+      dispatch({
+        type: "SET_SCREEN_SHARING_STREAM",
+        payload: { screenSharingStream: null },
+      });
     }
   };
 
-  const dispatchScreenSharingStream = (stream) => {
-    const { dispatch } = context;
-    dispatch({
-      type: "SET_SCREEN_SHARING_STREAM",
-      payload: { screenSharingStream: stream },
-    });
-  };
-
   const ScreeSharingComponent = () => {
-    const { state } = context;
-
     useEffect(() => {
-      screenSharingRef.current.srcObject = state.screenSharingStream;
+      const state = store.getState();
+
+      screenSharingRef.current.srcObject =
+        state.screenSharing.screenSharingStream;
     }, []);
 
     return (

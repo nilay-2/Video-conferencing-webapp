@@ -1,5 +1,5 @@
+import store from "../app/store";
 import SimplePeer from "simple-peer";
-
 const peers = {};
 
 export const prepareForIncomingConnection = (
@@ -8,22 +8,36 @@ export const prepareForIncomingConnection = (
   initiator,
   context
 ) => {
-  // console.log(context.state.mediaStream);
+  const { state, dispatch } = context;
 
+  const scrShrStream = store.getState();
+
+  const stream = state.mediaStream;
+
+  /* create a copy/clone of the local stream as any changes will get reflected in the original stream 
+    and it will become difficult to switch to original stream when performing "stop screen sharing"
+  */
+  const newStream = stream.clone();
+  // console.log("newStream", newStream);
   // if (initiator) {
   //   console.log("waiting as initiator");
   // } else {
   //   console.log("waiting as non initiator");
   // }
 
-  // console.log(`Incoming socket id: ${incomingSocketId}`);
+  // if screenSharing is enabled then replace vid track of screensharing stream with that of the local media stream
+  if (scrShrStream.screenSharing.screenSharingStream) {
+    const newScrSharingStreamObj =
+      scrShrStream.screenSharing.screenSharingStream.clone();
 
-  const { state, dispatch } = context;
+    console.log("new scr sharing", newScrSharingStreamObj);
+    newStream.removeTrack(newStream.getTracks()[1]);
+    newStream.addTrack(newScrSharingStreamObj.getTracks()[1]);
+  }
 
-  // console.log(state?.mediaStream);
   peers[incomingSocketId] = new SimplePeer({
     initiator,
-    stream: state.mediaStream,
+    stream: newStream,
   });
   peers[incomingSocketId].on("signal", (data) => {
     // again send data of the current user to the peer
@@ -112,12 +126,14 @@ export const closePeerConnectionOfLeavingUser = (
 
 export const replaceTrack = (stream) => {
   // get screen sharing video track
+  const peerConnections = Object.values(peers);
+  if (!peerConnections.length) return;
+
   const screenSharingTracks = stream.getTracks();
   const scrShareVidTrack = screenSharingTracks[1];
-  // console.log(scrShareVidTrack);
+  console.log(scrShareVidTrack);
 
   // replace the video track of peer users with the video track of screen sharing stream
-  const peerConnections = Object.values(peers);
   peerConnections.forEach((conn) => {
     const tracks = Object.values(conn.streams[0].getTracks());
     tracks.forEach((track) => {
