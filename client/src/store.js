@@ -5,6 +5,7 @@ export const initialState = {
   email: "",
   roomId: "",
   mediaStream: null,
+  mediaStreamClone: null,
   remoteStreams: [],
   screenSharingStream: null,
   socket: null,

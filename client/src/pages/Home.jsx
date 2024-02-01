@@ -45,9 +45,17 @@ const Home = () => {
       .getUserMedia(constraints)
       .then((stream) => {
         // console.log("local stream", stream);
+
+        const clone = stream.clone();
+
         dispatch({
           type: "SET_CREDENTIALS",
-          payload: { email: email, roomId: roomId, mediaStream: stream },
+          payload: {
+            email: email,
+            roomId: roomId,
+            mediaStream: stream,
+            mediaStreamClone: clone,
+          },
         });
 
         state.socket.emit("join-room", data);

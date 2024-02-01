@@ -57,7 +57,7 @@ const Meet = () => {
     // event received from the incoming user
     const { socket } = context.state;
 
-    videoRef.current.srcObject = context.state.mediaStream;
+    videoRef.current.srcObject = context.state.mediaStreamClone;
 
     socket?.on("connection-prepare", (data) => {
       // console.log(`preparation data ${data}`);
@@ -86,14 +86,14 @@ const Meet = () => {
 
   const toggleCamera = () => {
     const { state } = context;
-    const videoTracks = state.mediaStream.getVideoTracks();
+    const videoTracks = state.mediaStreamClone.getVideoTracks();
     videoTracks[0].enabled = !enableVideo;
     setEnableVideo(!enableVideo);
   };
 
   const toggleAudio = () => {
     const { state } = context;
-    const audioTracks = state.mediaStream.getAudioTracks();
+    const audioTracks = state.mediaStreamClone.getAudioTracks();
     audioTracks[0].enabled = !enableAudio;
     setEnableAudio(!enableAudio);
   };
