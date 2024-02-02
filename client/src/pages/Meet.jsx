@@ -133,27 +133,6 @@ const Meet = () => {
         setEnableScreenSharing(false);
         screenSharingRef.current.srcObject = null;
 
-        // restore original media stream track
-        // try {
-        //   const stream = await window.navigator.mediaDevices.getUserMedia({
-        //     audio: true,
-        //     video: true,
-        //   });
-
-        //   const clone = stream.clone();
-
-        //   dispatch({
-        //     type: "RESTORE_ORIGINAL_STREAM",
-        //     payload: {
-        //       mediaStream: stream,
-        //       mediaStreamClone: clone,
-        //     },
-        //   });
-
-        //   replaceTrack(stream);
-        // } catch (error) {
-        //   console.error(error);
-        // }
         replaceTrack(context.state.mediaStream);
         dispatch({
           type: "STOP_SCREEN_SHARING_STREAM",
