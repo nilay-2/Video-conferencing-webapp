@@ -7,10 +7,6 @@ Welcome to ZoomZest, a real-time communication platform for seamless video calls
 - [Features](#features)
 - [Demo](#demo)
 - [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
