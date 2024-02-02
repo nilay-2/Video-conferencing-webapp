@@ -1,6 +1,6 @@
 # Video Conferencing App
 
-Welcome to the Video Conferencing App, a real-time communication platform for seamless video calls, chat, and screen sharing.
+Welcome to ZoomZest, a real-time communication platform for seamless video calls, chat, and screen sharing.
 
 ## Table of Contents
 
