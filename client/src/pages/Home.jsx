@@ -36,6 +36,10 @@ const Home = () => {
     socket.on("connect", () => {
       console.log(socket.id);
     });
+
+    return () => {
+      socket.off("connect");
+    };
   }, []);
 
   const onSubmit = (data) => {

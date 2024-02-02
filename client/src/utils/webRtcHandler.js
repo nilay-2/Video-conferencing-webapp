@@ -10,35 +10,25 @@ export const prepareForIncomingConnection = (
 ) => {
   const { state, dispatch } = context;
 
-  // const scrShrStream = store.getState();
+  const scrShrStream = store.getState();
 
   const stream = state.mediaStream;
 
-  /* create a copy/clone of the local stream as any changes will get reflected in the original stream 
-    and it will become difficult to switch to original stream when performing "stop screen sharing"
-  */
-  // const newStream = state.mediaStreamClone;
-  // console.log("newStream", newStream);
-  // if (initiator) {
-  //   console.log("waiting as initiator");
-  // } else {
-  //   console.log("waiting as non initiator");
-  // }
+  let combinedStream = null;
 
-  // if screenSharing is enabled then replace vid track of screensharing stream with that of the local media stream
-  // if (scrShrStream.screenSharing.screenSharingStream) {
-  //   const newScrSharingStreamObj =
-  //     scrShrStream.screenSharing.screenSharingStream.clone();
-
-  //   console.log("new scr sharing", newScrSharingStreamObj);
-  //   newStream.removeTrack(newStream.getTracks()[1]);
-  //   newStream.addTrack(newScrSharingStreamObj.getTracks()[1]);
-  // }
+  // if user has already started screen sharing
+  if (scrShrStream.screenSharing.screenSharingStream) {
+    combinedStream = new MediaStream();
+    combinedStream.addTrack(
+      scrShrStream.screenSharing.screenSharingStream.getVideoTracks()[0]
+    );
+    combinedStream.addTrack(stream.getAudioTracks()[0]);
+  }
 
   peers[incomingSocketId] = new SimplePeer({
     initiator,
     // stream: newStream,
-    stream: stream,
+    stream: combinedStream || stream,
   });
   peers[incomingSocketId].on("signal", (data) => {
     // again send data of the current user to the peer

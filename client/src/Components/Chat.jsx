@@ -17,6 +17,10 @@ const Chat = () => {
         payload: { msgData: msgData },
       });
     });
+
+    return () => {
+      socket.off("send_message_to_room");
+    };
   }, []);
 
   const sendMessage = () => {
