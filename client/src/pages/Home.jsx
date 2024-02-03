@@ -48,8 +48,6 @@ const Home = () => {
     window.navigator.mediaDevices
       .getUserMedia(constraints)
       .then((stream) => {
-        // console.log("local stream", stream);
-
         // const clone = stream.clone();
 
         dispatch({

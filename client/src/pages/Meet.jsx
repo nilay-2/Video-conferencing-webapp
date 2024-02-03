@@ -43,25 +43,19 @@ const Meet = () => {
   const videoRef = useRef();
   const screenSharingRef = useRef();
 
-  // media stream
-  // const [mediaStream, setMediaStream] = useState(null);
-
   // toggle variables
   const [enableVideo, setEnableVideo] = useState(true);
   const [enableAudio, setEnableAudio] = useState(true);
   const [enableScreenSharing, setEnableScreenSharing] = useState(false);
-  // const [showChatBox, setShowChatBox] = useState(false);
   const [showMember, setShowMember] = useState(false);
 
   useEffect(() => {
     // event received from the incoming user
     const { socket } = context.state;
-    console.log(context.state);
 
     videoRef.current.srcObject = context.state.mediaStream;
 
     socket?.on("connection-prepare", (data) => {
-      // console.log(`preparation data ${data}`);
       const { incomingSocketId } = data;
 
       prepareForIncomingConnection(socket, incomingSocketId, false, context);
@@ -80,7 +74,6 @@ const Meet = () => {
     });
 
     socket?.on("notify-participant-left-room", (roomLeavingUserSocketId) => {
-      // console.log(`leaving user socket id: ${roomLeavingUserSocketId}`);
       closePeerConnectionOfLeavingUser(roomLeavingUserSocketId, context);
     });
     return () => {
@@ -110,14 +103,6 @@ const Meet = () => {
       const screenSharingStream = await navigator.mediaDevices.getDisplayMedia(
         displayMediaOptions
       );
-
-      // screenSharingRef.current.srcObject = screenSharingStream;
-      // dispatchScreenSharingStream(screenSharingStream);
-
-      // dispatch({
-      //   type: "SET_SCREEN_SHARING_STREAM",
-      //   payload: { screenSharingStream: screenSharingStream },
-      // });
 
       dispatch({
         type: "SET_SCREEN_SHARING_STREAM",
@@ -199,7 +184,17 @@ const Meet = () => {
         >
           <div className="h-full w-full overflow-auto">
             <div className="video-grid-container h-full w-full">
-              <div className="h-full w-full mx-auto bg-black rounded-md">
+              <div className="h-full w-full mx-auto bg-black rounded-md relative">
+                <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-2">
+                  <p className=" bottom-5 left-5 text-white">You</p>
+                  <div className="text-white items-center  top-2 right-5 text-2xl px-2 rounded-full bg-slate-900 hidden">
+                    <i class="bi bi-volume-up-fill"></i>
+                    <i class="bi bi-volume-mute-fill"></i>
+
+                    <i class="bi bi-camera-video-fill"></i>
+                    <i class="bi bi-camera-video-off"></i>
+                  </div>
+                </div>
                 <video
                   ref={videoRef}
                   autoPlay

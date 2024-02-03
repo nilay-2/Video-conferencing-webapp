@@ -1,15 +1,38 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import "../css/VideoSpan.css";
 import { IconToggle } from "../utils/resizeComponent";
+import { AppContext } from "../App";
 const VideoContainer = (props) => {
   const remoteStreamRef = useRef();
+
+  const { state, dispatch } = useContext(AppContext);
 
   const [showPinOpt, setShowPinOpt] = useState(false);
   const [expand, setExpand] = useState(false);
 
   useEffect(() => {
+    console.log(props.streamPayload.remoteStream);
     remoteStreamRef.current.srcObject = props.streamPayload.remoteStream;
+
+    // get remote stream username
+    getRemoteStreamUserName(props.streamPayload.socketId, state.roomId);
+
+    state.socket.on("receive_username", (data) => {
+      dispatch({ type: "SET_REMOTE_USERNAME", payload: data });
+    });
+
+    return () => {
+      state.socket.off("receive_username");
+    };
   }, []);
+
+  const getRemoteStreamUserName = async (socketId, roomId) => {
+    const data = {
+      querySocketId: socketId,
+      roomId: roomId,
+    };
+    state.socket.emit("request_username", data);
+  };
 
   const showPinBox = () => {
     setShowPinOpt(true);
@@ -63,6 +86,18 @@ const VideoContainer = (props) => {
       onMouseOut={hidePinBox}
       id={props.vidId}
     >
+      <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-2">
+        <p className=" bottom-5 left-5 text-white">
+          {props.streamPayload?.username}
+        </p>
+        <div className="text-white items-center  top-2 right-5 text-2xl px-2 rounded-full bg-slate-900 hidden">
+          <i class="bi bi-volume-up-fill"></i>
+          <i class="bi bi-volume-mute-fill"></i>
+
+          <i class="bi bi-camera-video-fill"></i>
+          <i class="bi bi-camera-video-off"></i>
+        </div>
+      </div>
       <TogglePinButton />
       <video ref={remoteStreamRef} autoPlay className="w-full h-full"></video>
     </div>
