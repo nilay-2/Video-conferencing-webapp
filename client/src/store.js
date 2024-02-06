@@ -5,6 +5,7 @@ export const initialState = {
   email: "",
   roomId: "",
   mediaStream: null,
+  // mediaStreamClone: null,
   remoteStreams: [],
   screenSharingStream: null,
   socket: null,
@@ -110,17 +111,12 @@ export const reducer = (state = initialState, action) => {
         showChatBox: !state.showChatBox,
       };
 
-    case "SET_REMOTE_USERNAME":
-      const { username, remoteSocketId } = action.payload;
-
-      const remoteUsers = state.remoteStreams.map((user) => {
-        if (user.socketId === remoteSocketId) user.username = username;
-      });
-
-      return {
-        ...state,
-        remoteUsers: remoteUsers,
-      };
+    // case "RESTORE_ORIGINAL_STREAM":
+    //   return {
+    //     ...state,
+    //     mediaStream: action.payload.mediaStream,
+    //     mediaStreamClone: action.payload.mediaStreamClone,
+    //   };
 
     default:
       return state;

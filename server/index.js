@@ -2,12 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const {
-  addMember,
-  initialUpdate,
-  leaveRoom,
-  getUserName,
-} = require("./utils/RoomHandler");
+const { addMember, initialUpdate, leaveRoom } = require("./utils/RoomHandler");
 
 dotenv.config();
 
@@ -71,18 +66,6 @@ io.on("connection", (socket) => {
   socket.on("send_message", (msgData) => {
     const { roomId } = msgData;
     io.to(roomId).emit("send_message_to_room", msgData);
-  });
-
-  // socket event to get the remote stream user name
-  socket.on("request_username", (data) => {
-    const { querySocketId, roomId } = data;
-
-    const user = getUserName(querySocketId, roomId, roomMembers);
-
-    io.to(roomId).emit("receive_username", {
-      username: user.email,
-      remoteSocketId: querySocketId,
-    });
   });
 });
 

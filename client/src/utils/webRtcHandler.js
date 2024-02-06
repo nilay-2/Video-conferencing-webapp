@@ -27,6 +27,7 @@ export const prepareForIncomingConnection = (
 
   peers[incomingSocketId] = new SimplePeer({
     initiator,
+    // stream: newStream,
     stream: combinedStream || stream,
   });
   peers[incomingSocketId].on("signal", (data) => {
@@ -39,6 +40,7 @@ export const prepareForIncomingConnection = (
 
     socket.emit("connection-signal", signalData);
   });
+  // console.log(peers);
 
   // send signalling data
 

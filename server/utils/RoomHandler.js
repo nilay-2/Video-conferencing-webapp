@@ -65,15 +65,3 @@ exports.leaveRoom = (socket, mapOfMembers, socketToRooms) => {
 
   this.initialUpdate(mapOfMembers, socketToRooms);
 };
-
-exports.getUserName = (socketIdToBeQueried, roomId, roomMembersMap) => {
-  const members = roomMembersMap.get(roomId);
-
-  if (!members) return;
-
-  const user = members.find((member) => {
-    if (member.socketId === socketIdToBeQueried) return member;
-  });
-
-  return user;
-};
