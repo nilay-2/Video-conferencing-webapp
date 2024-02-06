@@ -18,7 +18,7 @@ Welcome to ZoomZest, a real-time communication platform for seamless video calls
 
 ## Demo
 
-Visit the live demo: [Video Conferencing App Demo](https://video-conferencing-webapp.vercel.app/)
+Visit the live demo: [Video Conferencing WebApp](https://video-conferencing-webapp.vercel.app/)
 
 ## Tech Stack
 
