@@ -11,8 +11,8 @@ Welcome to ZoomZest, a real-time communication platform for seamless video calls
 ## Features
 
 - Create and join video conferencing rooms
-- Real-time video calls with peers
-- In-app chat for instant communication
+- Real-time video calls with peers 💻📽
+- In-app chat for instant communication 📱
 - Screen sharing for collaborative work
 - Responsive and user-friendly UI
 
