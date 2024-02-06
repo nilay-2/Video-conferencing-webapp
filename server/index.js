@@ -2,13 +2,17 @@ const express = require("express");
 const dotenv = require("dotenv");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const { addMember, initialUpdate, leaveRoom } = require("./utils/RoomHandler");
+const {
+  addMember,
+  initialUpdate,
+  leaveRoom,
+  getUserName,
+} = require("./utils/RoomHandler");
 
 dotenv.config();
 
 const port = process.env.PORT || 5000;
 
-// const activeRooms = new Set(); // Set to store active rooms
 const roomMembers = new Map(); // Map to store members of each room
 
 const socketToRooms = new Map();
@@ -21,7 +25,6 @@ const io = new Server(httpServer, {
       process.env.NODE_ENV === "production"
         ? "https://video-conferencing-webapp.vercel.app"
         : "http://localhost:3000",
-    // credentials: true,
   },
 });
 
@@ -66,6 +69,18 @@ io.on("connection", (socket) => {
   socket.on("send_message", (msgData) => {
     const { roomId } = msgData;
     io.to(roomId).emit("send_message_to_room", msgData);
+  });
+
+  // socket event to get the remote stream user name
+  socket.on("request_username", (data) => {
+    const { querySocketId, roomId } = data;
+
+    const user = getUserName(querySocketId, roomId, roomMembers);
+
+    io.to(roomId).emit("receive_username", {
+      username: user.email,
+      remoteSocketId: querySocketId,
+    });
   });
 });
 

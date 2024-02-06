@@ -27,7 +27,6 @@ export const prepareForIncomingConnection = (
 
   peers[incomingSocketId] = new SimplePeer({
     initiator,
-    // stream: newStream,
     stream: combinedStream || stream,
   });
   peers[incomingSocketId].on("signal", (data) => {
@@ -40,7 +39,6 @@ export const prepareForIncomingConnection = (
 
     socket.emit("connection-signal", signalData);
   });
-  // console.log(peers);
 
   // send signalling data
 
@@ -64,8 +62,6 @@ export const handleSignallingData = (signallingData) => {
   if (peers[incomingSocketId]) {
     peers[incomingSocketId].signal(signal);
   }
-
-  // listen to remote streams
 };
 
 // when user clicks on the end call button the connections with all the peer connections for this current user will be destroyed
@@ -129,7 +125,6 @@ export const replaceTrack = (stream) => {
     const tracks = Object.values(conn.streams[0].getTracks());
     tracks.forEach((track) => {
       if (track.kind === scrShareVidTrack.kind) {
-        // console.log(track, scrShareVidTrack);
         conn.replaceTrack(track, scrShareVidTrack, conn.streams[0]);
       }
     });

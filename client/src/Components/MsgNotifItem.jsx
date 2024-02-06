@@ -3,7 +3,6 @@ import { AppContext } from "../App";
 
 const MsgNotifItem = (props) => {
   const { dispatch } = useContext(AppContext);
-  // console.log(props);
   return (
     <div
       className="cursor-pointer"

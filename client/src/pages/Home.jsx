@@ -12,6 +12,7 @@ const constraints = {
 const Home = () => {
   // using context
   const { state, dispatch } = useContext(AppContext);
+
   // react hoot form
   const navigate = useNavigate();
   const {
@@ -27,9 +28,7 @@ const Home = () => {
         : "http://localhost:5000";
 
     console.log(`Environment: ${process.env.NODE_ENV}`);
-    const socket = io(url, {
-      // withCredentials: true,
-    });
+    const socket = io(url, {});
 
     dispatch({ type: "SET_SOCKET_CONNECTION", payload: { socket: socket } });
 
@@ -48,8 +47,6 @@ const Home = () => {
     window.navigator.mediaDevices
       .getUserMedia(constraints)
       .then((stream) => {
-        // console.log("local stream", stream);
-
         // const clone = stream.clone();
 
         dispatch({
@@ -58,7 +55,6 @@ const Home = () => {
             email: email,
             roomId: roomId,
             mediaStream: stream,
-            // mediaStreamClone: clone,
           },
         });
 
