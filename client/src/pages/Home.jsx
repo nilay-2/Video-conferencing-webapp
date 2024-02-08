@@ -69,7 +69,7 @@ const Home = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-landing_page bg-no-repeat bg-cover p-3">
+    <div className="md:h-screen w-screen h-auto bg-landing_page bg-no-repeat bg-cover p-3">
       <div
         className="h-full w-full mx-auto flex flex-col"
         style={{ maxWidth: "1900px" }}
@@ -81,7 +81,7 @@ const Home = () => {
           </p>
         </div>
         <div className="h-full mt-16">
-          <div className="text-content-container px-5 max-w-7xl mx-auto flex md:flex-row justify-between flex-col">
+          <div className="text-content-container md:px-5 max-w-7xl mx-auto flex md:flex-row justify-between flex-col">
             <div className="md:order-1 order-2">
               <div className="text-content md:mt-28 mt-10 flex flex-col md:gap-10 gap-12">
                 <p className="sm:text-3xl text-2xl font-semibold text-slate-700 sm:max-w-md">
