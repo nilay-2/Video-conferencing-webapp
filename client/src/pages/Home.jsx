@@ -69,19 +69,19 @@ const Home = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-landing_page bg-no-repeat bg-cover">
+    <div className="h-screen w-screen bg-landing_page bg-no-repeat bg-cover p-5">
       <div
         className="h-full w-full mx-auto flex flex-col"
         style={{ maxWidth: "1900px" }}
       >
         <div className="w-full header max-w-7xl mx-auto">
-          <p className="text-blue-600 text-3xl font-extrabold pl-6 pt-6">
+          <p className="text-blue-600 text-3xl font-extrabold md:pl-6 md:pt-6">
             <i className="bi bi-person-video3"></i>
             <span className="ml-3">ZoomZest</span>
           </p>
         </div>
         <div className="h-full mt-16">
-          <div className="text-content-container px-8 max-w-7xl mx-auto flex md:flex-row justify-between flex-col">
+          <div className="text-content-container max-w-7xl mx-auto flex md:flex-row justify-between flex-col">
             <div className="md:order-1 order-2">
               <div className="text-content mt-28 flex flex-col md:gap-10 gap-12">
                 <p className="sm:text-3xl text-2xl font-semibold text-slate-700 sm:max-w-md">
@@ -95,6 +95,9 @@ const Home = () => {
                   Empower your team's collaboration with video conferencing web
                   app. Connect easily, collaborate effortlessly, and make every
                   meeting count, wherever you are.
+                </p>
+                <p className="sm:text-3xl text-2xl font-semibold text-slate-800">
+                  Get Started
                 </p>
                 <form
                   onSubmit={handleSubmit(onSubmit)}
