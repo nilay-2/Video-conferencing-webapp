@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../App";
@@ -13,8 +13,9 @@ const Home = () => {
   // using context
   const { state, dispatch } = useContext(AppContext);
 
-  // react hoot form
   const navigate = useNavigate();
+
+  // react hoot form
   const {
     register,
     handleSubmit,
@@ -68,45 +69,77 @@ const Home = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto text-center">
-      <p className="my-4">Welcome to google meet clone</p>
-
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="max-w-md mx-auto flex flex-col gap-2"
+    <div className="h-screen w-screen bg-landing_page bg-no-repeat bg-cover">
+      <div
+        className="h-full w-full mx-auto flex flex-col"
+        style={{ maxWidth: "1900px" }}
       >
-        <input
-          type="email"
-          placeholder="email"
-          className="outline px-2 py-1"
-          {...register("email", { required: true })}
-          aria-invalid={errors.email ? "true" : "false"}
-        />
-        {errors.email?.type === "required" && (
-          <p role="alert" className="text-red-500 text-sm text-start">
-            Email is required
+        <div className="w-full header max-w-7xl mx-auto">
+          <p className="text-blue-600 text-3xl font-extrabold pl-6 pt-6">
+            <i className="bi bi-person-video3"></i>
+            <span className="ml-3">ZoomZest</span>
           </p>
-        )}
+        </div>
+        <div className="h-full mt-16">
+          <div className="text-content-container px-8 max-w-7xl mx-auto flex md:flex-row justify-between flex-col">
+            <div className="md:order-1 order-2">
+              <div className="text-content mt-28 flex flex-col md:gap-10 gap-12">
+                <p className="sm:text-3xl text-2xl font-semibold text-slate-700 sm:max-w-md">
+                  Elevate Your Meetings with{" "}
+                  <span className="font-extrabold text-slate-800">
+                    <span>Zoom</span>
+                    <span className="text-pink-600">Zest</span>
+                  </span>
+                </p>
+                <p className="max-w-lg sm:text-lg text-slate-600">
+                  Empower your team's collaboration with video conferencing web
+                  app. Connect easily, collaborate effortlessly, and make every
+                  meeting count, wherever you are.
+                </p>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="max-w-sm flex flex-col gap-3"
+                >
+                  <input
+                    type="email"
+                    placeholder="email"
+                    className="px-2 py-1"
+                    {...register("email", { required: true })}
+                    aria-invalid={errors.email ? "true" : "false"}
+                  />
+                  {errors.email?.type === "required" && (
+                    <p role="alert" className="text-red-500 text-sm text-start">
+                      Email is required
+                    </p>
+                  )}
 
-        <input
-          type="text"
-          placeholder="room id"
-          className="outline px-2 py-1"
-          {...register("roomId", { required: true })}
-          aria-invalid={errors.roomId ? "true" : "false"}
-        />
-        {errors.roomId?.type === "required" && (
-          <p role="alert" className="text-red-500 text-sm text-start">
-            Room id is required
-          </p>
-        )}
+                  <input
+                    type="text"
+                    placeholder="room id"
+                    className="px-2 py-1"
+                    {...register("roomId", { required: true })}
+                    aria-invalid={errors.roomId ? "true" : "false"}
+                  />
+                  {errors.roomId?.type === "required" && (
+                    <p role="alert" className="text-red-500 text-sm text-start">
+                      Room id is required
+                    </p>
+                  )}
 
-        <input
-          type="submit"
-          value="Join"
-          className="bg-blue-700 text-white rounded-md p-1 hover:cursor-pointer"
-        />
-      </form>
+                  <input
+                    type="submit"
+                    value="Join"
+                    className="bg-blue-700 text-white rounded-md p-1 hover:cursor-pointer"
+                  />
+                </form>
+              </div>
+            </div>
+            <div className="h-auto md:order-2 order-1">
+              <img src="/landing_hero_img.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

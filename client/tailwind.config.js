@@ -6,6 +6,9 @@ module.exports = {
       width: {
         chat: "35rem",
       },
+      backgroundImage: {
+        landing_page: "url('../public/landing_page_img.png')",
+      },
     },
   },
   plugins: [],
