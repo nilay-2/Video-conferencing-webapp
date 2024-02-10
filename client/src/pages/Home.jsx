@@ -91,7 +91,7 @@ const Home = () => {
                     <span className="text-pink-600">Zest</span>
                   </span>
                 </p>
-                <p className="max-w-lg sm:text-lg text-slate-600 text-justify md:text-start">
+                <p className="max-w-md sm:text-lg text-slate-600 text-justify md:text-start">
                   Empower your team's collaboration with video conferencing web
                   app. Connect easily, collaborate effortlessly, and make every
                   meeting count, wherever you are.
@@ -101,7 +101,7 @@ const Home = () => {
                 </p>
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="max-w-sm flex flex-col gap-3 pb-16 md:pb-0"
+                  className="w-full max-w-lg flex flex-col gap-3 pb-16 md:pb-0 md:mx-0"
                 >
                   <input
                     type="email"
